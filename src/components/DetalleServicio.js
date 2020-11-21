@@ -12,11 +12,9 @@ const mapStateToProps = (state) => {
 const ConnectDetalleServicio = ({servicio, editar, eliminar}) => {
     return (
         <Card>
-            <Card.Header>
-                <Accordion.Toggle as={Button} variant="link" eventKey={servicio.id}>
-                    {servicio.nombre}
-                </Accordion.Toggle>
-            </Card.Header>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey={servicio.id}>
+                {servicio.nombre}
+            </Accordion.Toggle>
             <Accordion.Collapse eventKey={servicio.id}>
                 <Card.Body>
                     <ListGroup variant="flush">
