@@ -37,7 +37,10 @@ const initialState = {
 function serviciosReducer (state=initialState, action) {
     switch (action.type) {
         case AGREGAR_SERVICIO:
-            state.servicios.push(action.data);
+            const id = state.servicios[state.servicios.length - 1].id + 1;
+            state = Object.assign({}, state , {
+                servicios: state.servicios.concat({id, ...action.data})
+            });
         break;
         case EDITAR_SERVICIO:
             let idxEditar = state.servicios.findIndex(servicio => servicio.id === action.data.id);

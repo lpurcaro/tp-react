@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Row, Col } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import Agregar from './Agregar';
+import AgregarServicio from './AgregarServicio';
 import ListaServicios from './ListaServicios';
 import ModalEditarServicio from "./ModalEditarServicio";
 import ModalEliminar from './ModalEliminar';
@@ -48,7 +48,7 @@ const ConnectServicios = ({listaServicios, eliminar, editar}) => {
             <div>
                 <Row>
                     <Col><h2>Servicios disponibles</h2></Col>
-                    <Col className={'btn-column'}><Agregar tipo={'servicio'}/></Col>
+                    <Col className={'btn-column'}><AgregarServicio tipo={'servicio'}/></Col>
                 </Row>
             </div>
             <div className={'mt-md'}>
