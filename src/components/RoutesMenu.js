@@ -1,10 +1,10 @@
 import React from 'react';
 import {Navbar, Nav} from 'react-bootstrap';
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
+
 import Turnos from "./Turnos";
 import Pacientes from "./Pacientes";
 import Servicios from "./Servicios";
-
 
 const RoutesMenu = () => {
     return <BrowserRouter>
