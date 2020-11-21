@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import {Nav, Navbar} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
 import {Route} from "react-router";
 import Turnos from "./components/Turnos";
 import Pacientes from "./components/Pacientes";
@@ -29,9 +29,11 @@ function App() {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Route exact path='/' component={Turnos}/>
-        <Route path='/pacientes' component={Pacientes}/>
-        <Route path='/servicios' component={Servicios}/>
+        <Container className={'mt-lg'}>
+          <Route exact path='/' component={Turnos}/>
+          <Route path='/pacientes' component={Pacientes}/>
+          <Route path='/servicios' component={Servicios}/>
+        </Container>
       </BrowserRouter>
     </div>
   );

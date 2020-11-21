@@ -3,8 +3,35 @@ import { AGREGAR_SERVICIO, EDITAR_SERVICIO, ELIMINAR_SERVICIO } from '../constan
 // servicio { id: int, nombre: string, tipo: tipoAtencion, precio: double, duracionMinutos: int}
 
 const initialState = {
-    tipoAtencion: ['Estética', 'Médica'],
-    servicios: []
+    tipoAtencion: ['Estético', 'Médico'],
+    servicios: [{
+        id: 1,
+        nombre: 'Baño',
+        tipo: 'Estéticao',
+        precio: 600,
+        duracion: 30
+    },
+    {
+        id: 2,
+        nombre: 'Corte',
+        tipo: 'Estético',
+        precio: 600,
+        duracion: 30
+    },
+    {
+        id: 3,
+        nombre: 'Castración',
+        tipo: 'Médico',
+        precio: 5000,
+        duracion: 60
+    },
+    {
+        id: 4,
+        nombre: 'Consulta',
+        tipo: 'Médico',
+        precio: 950,
+        duracion: 30
+    }]
 };
 
 function serviciosReducer (state=initialState, action) {
