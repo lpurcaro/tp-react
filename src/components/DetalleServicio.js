@@ -1,19 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { Accordion, Card, Button, ListGroup } from 'react-bootstrap';
+import { Accordion, Card, Button, ListGroup, ButtonGroup, Row, Col } from 'react-bootstrap';
+import { Pencil, Trash } from 'react-bootstrap-icons';
 
-const mapStateToProps = (state) => {
-    return {
-        eliminar: state.servicios,
-        editar: state.servicios
-    }
-};
-
-const ConnectDetalleServicio = ({servicio, editar, eliminar}) => {
+const DetalleServicio = ({servicio, editar, eliminar}) => {
     return (
         <Card>
             <Accordion.Toggle as={Card.Header} variant="link" eventKey={servicio.id}>
-                {servicio.nombre}
+                <Row>
+                    <Col>{servicio.nombre}</Col>
+                    <Col className={'btn-column'}>
+                        <ButtonGroup size="sm">
+                            <Button onClick={() => editar(servicio.id)}><Pencil/></Button>
+                            <Button onClick={() => eliminar(servicio.id)}><Trash/></Button>
+                        </ButtonGroup>
+                    </Col>
+                </Row>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={servicio.id}>
                 <Card.Body>
@@ -27,8 +28,6 @@ const ConnectDetalleServicio = ({servicio, editar, eliminar}) => {
         </Card>
     )
 }
-
-const DetalleServicio = connect(mapStateToProps)(ConnectDetalleServicio)
 
 export default DetalleServicio
 

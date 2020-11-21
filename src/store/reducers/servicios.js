@@ -7,7 +7,7 @@ const initialState = {
     servicios: [{
         id: 1,
         nombre: 'Baño',
-        tipo: 'Estéticao',
+        tipo: 'Estético',
         precio: 600,
         duracion: 30
     },
