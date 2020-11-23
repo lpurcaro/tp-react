@@ -31,8 +31,9 @@ function turnosReducer (state=initialState, action) {
             state.turnos[turno] = action.data;
         break;
         case ELIMINAR_TURNO:
-            let eliminar = state.turnos.findIndex(turno => turno.id === action.data.id);
-            state.servicios.splice(eliminar, 1);
+            state = Object.assign({}, state , {
+                turnos: state.turnos.filter(turno => turno.id !== action.data.id)
+            });
         break;
     }
 

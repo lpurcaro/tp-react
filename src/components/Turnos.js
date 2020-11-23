@@ -7,6 +7,7 @@ import AgregarTurno from "./AgregarTurno";
 import ListaTurnos from "./ListaTurnos";
 import {editarTurno, eliminarTurno} from "../store/actions";
 import ModalTurnos from "./ModalTurnos";
+import ModalEliminar from "./ModalEliminar";
 
 const mapStateToProps = (state) => {
     return {
@@ -19,7 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         eliminar: id => dispatch(eliminarTurno({id})),
-        editar: servicio => dispatch(editarTurno(servicio))
+        editar: turno => dispatch(editarTurno(turno))
     }
 };
 
@@ -28,6 +29,9 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
     const [fecha, setFecha] = useState(new Date());
     const [turnosFullData, setTurnosFullData] = useState([]);
     const [turnosFiltrados, setTurnosFiltrados] = useState([]);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [turnoAEliminar, setTurnoAEliminar] = useState();
 
     useEffect(() => {
         const turnosFullData = turnos.map(turno => {
@@ -56,6 +60,16 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
         return h1[0] > h2[0] ? 1 : -1;
     };
 
+    const toggleShowDeleteModal = (id) => {
+        setTurnoAEliminar(id);
+        setShowDeleteModal(true);
+    };
+
+    const eliminarTurno = () => {
+        eliminar(turnoAEliminar);
+        setShowDeleteModal(false);
+    };
+
     return (
         <>
             <div>
@@ -73,7 +87,8 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
                     onChange={date => setFecha(date)} />
             </div>
             <div className={'mt-sm'}>
-                <ListaTurnos turnos={turnosFiltrados} editar={editar} eliminar={eliminar}/>
+                <ListaTurnos turnos={turnosFiltrados} editar={editar} eliminar={toggleShowDeleteModal}/>
+                <ModalEliminar show={showDeleteModal} close={() => setShowDeleteModal(false)} eliminar={eliminarTurno} tipo={'turno'}/>
             </div>
             {/*<ModalTurnos servicio={turno} onSubmit={agregarTurno} onClose={toggleAgregarTurno} show={showAgregarTurno} nuevo={true}/>*/}
         </>

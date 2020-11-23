@@ -21,6 +21,7 @@ const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacien
     useEffect(() => {
         if (!show) {
             setNuevoTurno({});
+            setFecha(null);
             setShowFormError(false);
         }
     }, [show]);
@@ -92,23 +93,6 @@ const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacien
                             { servicios.map(servicio => <option key={servicio.id} value={servicio.id}>{servicio.nombre}</option>) }
                         </Form.Control>
                     </Form.Group>
-                        {/*<Form.Group as={Col} controlId="precio" onChange={e => setNuevoServicio({...nuevoServicio, precio: e.target.value})}>*/}
-                        {/*    <Form.Label>Precio</Form.Label>*/}
-                        {/*    <Form.Control type="number" defaultValue={nuevoServicio.precio}/>*/}
-                        {/*</Form.Group>*/}
-                    {/*</Form.Row>*/}
-
-                    {/*<Form.Group controlId="tipo" onChange={e => setNuevoServicio({...nuevoServicio, tipo: e.target.value})}>*/}
-                    {/*    <Form.Label>Tipo</Form.Label>*/}
-                    {/*    <Form.Control as="select" defaultValue={nuevoServicio.tipo || tipoAtencion[0]}>*/}
-                    {/*        { tipoAtencion.map(tipo => <option key={tipo}>{tipo}</option>) }*/}
-                    {/*    </Form.Control>*/}
-                    {/*</Form.Group>*/}
-
-                    {/*<Form.Group controlId="duracion" onChange={e => setNuevoServicio({...nuevoServicio, duracion: e.target.value})}>*/}
-                    {/*    <Form.Label>Duracion</Form.Label>*/}
-                    {/*    <Form.Control type="number" defaultValue={nuevoServicio.duracion}/>*/}
-                    {/*</Form.Group>*/}
                 </Form>
             </Modal.Body>
             <Modal.Footer>

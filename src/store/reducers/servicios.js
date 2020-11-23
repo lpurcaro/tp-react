@@ -48,8 +48,9 @@ function serviciosReducer (state=initialState, action) {
             state.servicios[idxEditar] = action.data;
         break;
         case ELIMINAR_SERVICIO:
-            let idxEliminar = state.servicios.findIndex(servicio => servicio.id === action.data.id);
-            state.servicios.splice(idxEliminar, 1);
+            state = Object.assign({}, state , {
+                servicios: state.servicios.filter(servicio => servicio.id !== action.data.id)
+            });
         break;
     }
 
