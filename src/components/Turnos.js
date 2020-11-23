@@ -35,16 +35,19 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
             const servicio = servicios.find(servicio => servicio.id === turno.servicio);
             return {...turno, paciente, servicio}
         });
-
         setTurnosFullData(turnosFullData);
     }, [turnos, pacientes, servicios]);
 
     useEffect(() => {
         const fechaFormateada = `${fecha.getUTCDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         const turnosPorFecha = turnosFullData.filter(turno => turno.fecha === fechaFormateada);
+        turnosPorFecha.sort(ordenarPorHorario);
         setTurnosFiltrados(turnosPorFecha);
     }, [fecha, turnosFullData]);
 
+    const ordenarPorHorario = (h1, h2) => {
+      return h1 > h2 ? 1 : -2;
+    };
 
     return (
         <>

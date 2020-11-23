@@ -6,7 +6,8 @@ const initialState = {
     // fechas: [],
     // horarios: [],
     turnos: [
-        {id: 1, fecha: '23/11/2020', horario: '15:00', paciente: 0, servicio: 1}
+        {id: 2, fecha: '23/11/2020', horario: '15:00', paciente: 1, servicio: 1},
+        {id: 1, fecha: '23/11/2020', horario: '15:30', paciente: 1, servicio: 2}
     ]
 };
 

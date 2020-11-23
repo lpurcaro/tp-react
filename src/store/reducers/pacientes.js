@@ -5,7 +5,7 @@ import { AGREGAR_PACIENTE, EDITAR_PACIENTE, AGREGAR_ATENCION } from '../constant
 
 const initialState = {
     pacientes: [{
-        id: 0,
+        id: 1,
         nombre: 'Coyote',
         fechaNac: '05/03/2019',
         dueno: 'Lucila Purcaro',
