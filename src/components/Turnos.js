@@ -45,8 +45,15 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
         setTurnosFiltrados(turnosPorFecha);
     }, [fecha, turnosFullData]);
 
-    const ordenarPorHorario = (h1, h2) => {
-      return h1 > h2 ? 1 : -2;
+    const ordenarPorHorario = (t1, t2) => {
+        const h1 = t1.horario.split(':');
+        const h2 = t2.horario.split(':');
+
+        if (h1[0] === h2[0]) {
+            return h1[1] > h2[1] ? 1 : -1;
+        }
+
+        return h1[0] > h2[0] ? 1 : -1;
     };
 
     return (
