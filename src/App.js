@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Container, Nav, Navbar, Badge} from "react-bootstrap";
 import {Route} from "react-router";
 import Turnos from "./components/Turnos";
 import Pacientes from "./components/Pacientes";
 import Servicios from "./components/Servicios";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Link} from "react-router-dom";
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -17,15 +18,21 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href='/'>
-                Turnos
-              </Nav.Link>
-              <Nav.Link href='/pacientes'>
-                Pacientes
-              </Nav.Link>
-              <Nav.Link href="/servicios">
-                Servicios
-              </Nav.Link>
+              <Badge>
+                <Link to='/turnos'>
+                  Turnos
+                </Link>
+              </Badge>
+              <Badge>
+                <Link to='/pacientes'>
+                  Pacientes
+                </Link>
+              </Badge>
+              <Badge>
+                <Link to='/servicios'>
+                  Servicios
+                </Link>
+              </Badge>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

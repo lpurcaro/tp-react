@@ -38,13 +38,14 @@ function serviciosReducer (state=initialState, action) {
     switch (action.type) {
         case AGREGAR_SERVICIO:
             const id = state.servicios[state.servicios.length - 1].id + 1;
+            action.data.id = id;
             state = Object.assign({}, state , {
-                servicios: state.servicios.concat({id, ...action.data})
+                servicios: state.servicios.concat(action.data)
             });
         break;
         case EDITAR_SERVICIO:
             let idxEditar = state.servicios.findIndex(servicio => servicio.id === action.data.id);
-            state.servicios[idxEditar] = action.data.servicio;
+            state.servicios[idxEditar] = action.data;
         break;
         case ELIMINAR_SERVICIO:
             let idxEliminar = state.servicios.findIndex(servicio => servicio.id === action.data.id);

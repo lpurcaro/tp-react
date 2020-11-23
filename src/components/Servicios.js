@@ -6,6 +6,7 @@ import ListaServicios from './ListaServicios';
 import ModalEditarServicio from "./ModalEditarServicio";
 import ModalEliminar from './ModalEliminar';
 import {editarServicio, eliminarServicio} from "../store/actions";
+import ModalServicios from "./ModalServicios";
 
 const mapStateToProps = (state) => {
     return {
@@ -16,7 +17,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         eliminar: id => dispatch(eliminarServicio({id})),
-        editar: servicio => dispatch(editarServicio({servicio}))
+        editar: servicio => dispatch(editarServicio(servicio))
     }
 };
 
@@ -25,11 +26,11 @@ const ConnectServicios = ({listaServicios, eliminar, editar}) => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const [editarServicio, setEditarServicio] = useState();
+    const [servicioAEditar, setServicioAEditar] = useState({});
     const [servicioAEliminar, setServicioAEliminar] = useState();
 
     const toggleShowEditModal = (id) => {
-        setEditarServicio(listaServicios.find(servicio => servicio.id === id));
+        setServicioAEditar(listaServicios.find(servicio => servicio.id === id));
         setShowEditModal(true);
     };
 
@@ -53,7 +54,7 @@ const ConnectServicios = ({listaServicios, eliminar, editar}) => {
             </div>
             <div className={'mt-md'}>
                 <ListaServicios servicios={listaServicios} editar={toggleShowEditModal} eliminar={toggleShowDeleteModal}/>
-                <ModalEditarServicio show={showEditModal} close={() => setShowEditModal(false)} confirmar={editar} servicio={editarServicio}/>
+                <ModalServicios servicio={servicioAEditar} show={showEditModal} onClose={() => setShowEditModal(false)} onSubmit={editar}/>
                 <ModalEliminar show={showDeleteModal} close={() => setShowDeleteModal(false)} eliminar={eliminarServicio} tipo={'servicio'}/>
             </div>
         </div>
