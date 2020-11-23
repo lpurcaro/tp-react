@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 
 import {Container, Nav, Navbar, Badge} from "react-bootstrap";
@@ -19,7 +19,7 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Badge>
-                <Link to='/turnos'>
+                <Link to='/'>
                   Turnos
                 </Link>
               </Badge>

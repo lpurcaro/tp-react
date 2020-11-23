@@ -4,7 +4,13 @@ import { AGREGAR_PACIENTE, EDITAR_PACIENTE, AGREGAR_ATENCION } from '../constant
 // atencion { fecha: date, servicio: servicio, comentarios: string}
 
 const initialState = {
-    pacientes: []
+    pacientes: [{
+        id: 0,
+        nombre: 'Coyote',
+        fechaNac: '05/03/2019',
+        dueno: 'Lucila Purcaro',
+        historial: []
+    }]
 };
 
 function pacientesReducer (state=initialState, action) {

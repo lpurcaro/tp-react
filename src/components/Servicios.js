@@ -3,7 +3,6 @@ import { Row, Col } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import AgregarServicio from './AgregarServicio';
 import ListaServicios from './ListaServicios';
-import ModalEditarServicio from "./ModalEditarServicio";
 import ModalEliminar from './ModalEliminar';
 import {editarServicio, eliminarServicio} from "../store/actions";
 import ModalServicios from "./ModalServicios";
@@ -49,7 +48,7 @@ const ConnectServicios = ({listaServicios, eliminar, editar}) => {
             <div>
                 <Row>
                     <Col><h2>Servicios disponibles</h2></Col>
-                    <Col className={'btn-column'}><AgregarServicio tipo={'servicio'}/></Col>
+                    <Col className={'btn-column'}><AgregarServicio/></Col>
                 </Row>
             </div>
             <div className={'mt-md'}>

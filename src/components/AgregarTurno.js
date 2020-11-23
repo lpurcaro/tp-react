@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button} from 'react-bootstrap';
 import {connect} from "react-redux";
 import {agregarServicio} from '../store/actions';
-import ModalServicios from "./ModalServicios";
+import ModalTurnos from "./ModalTurnos";
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const ConnectAgregarServicio = ({agregarServicio}) => {
+const ConnectAgregarTurno = ({agregarServicio}) => {
 
     const [showAgregarServicio, setShowAgregarServicio] = useState(false);
 
@@ -26,11 +26,11 @@ const ConnectAgregarServicio = ({agregarServicio}) => {
     };
 
     return <>
-        <Button variant="outline-primary" onClick={toggleAgregarServicio}>Agregar Servicio</Button>
-        <ModalServicios servicio={servicio} onSubmit={agregarServicio} onClose={toggleAgregarServicio} show={showAgregarServicio} nuevo={true}/>
+        <Button variant="outline-primary" onClick={toggleAgregarServicio}>Agregar Turno</Button>
+        <ModalTurnos servicio={servicio} onSubmit={agregarServicio} onClose={toggleAgregarServicio} show={showAgregarServicio} nuevo={true}/>
     </>
 };
 
-const AgregarServicio = connect(null, mapDispatchToProps)(ConnectAgregarServicio);
+const AgregarTurno = connect(null, mapDispatchToProps)(ConnectAgregarTurno);
 
-export default AgregarServicio
+export default AgregarTurno
