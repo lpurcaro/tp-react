@@ -22,6 +22,7 @@ const DetalleTurno = ({turno, editar, eliminar}) => {
                         <ListGroup.Item><b>Servicio:</b> {turno.servicio.nombre}</ListGroup.Item>
                         <ListGroup.Item><b>Precio:</b> ${turno.servicio.precio}</ListGroup.Item>
                         <ListGroup.Item><b>Duración:</b> {turno.servicio.duracion} minutos</ListGroup.Item>
+                        <ListGroup.Item><b>Nro de Contacto:</b> {turno.paciente.telefono}</ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
             </Accordion.Collapse>

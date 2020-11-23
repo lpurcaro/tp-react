@@ -6,8 +6,8 @@ const initialState = {
     // fechas: [],
     // horarios: [],
     turnos: [
-        {id: 2, fecha: '23/11/2020', horario: '15:00', paciente: 1, servicio: 1},
-        {id: 1, fecha: '23/11/2020', horario: '15:30', paciente: 1, servicio: 2}
+        {id: 1, fecha: '23/11/2020', horario: '15:30', paciente: 1, servicio: 2},
+        {id: 2, fecha: '23/11/2020', horario: '15:00', paciente: 1, servicio: 1}
     ]
 };
 
@@ -20,11 +20,15 @@ function turnosReducer (state=initialState, action) {
         //     state.horarios = action.data;
         // break;
         case AGREGAR_TURNO:
-            state.turnos.push(action.data);
+            const id = state.turnos[state.turnos.length - 1].id + 1;
+            action.data.id = id;
+            state = Object.assign({}, state , {
+                turnos: state.turnos.concat(action.data)
+            });
         break;
         case EDITAR_TURNO:
             let turno = state.turnos.findIndex(turno => turno.id === action.data.id);
-            state.turnos[turno] = action.data.turno;
+            state.turnos[turno] = action.data;
         break;
         case ELIMINAR_TURNO:
             let eliminar = state.turnos.findIndex(turno => turno.id === action.data.id);

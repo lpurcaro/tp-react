@@ -1,16 +1,25 @@
 import { AGREGAR_PACIENTE, EDITAR_PACIENTE, AGREGAR_ATENCION } from '../constants/action_types'
 
-// paciente { id: int, nombre: string, fechaNac: date, dueno: string, historial: atencion[]}
+// paciente { id: int, nombre: string, fechaNac: date, dueno: string, historial: atencion[], telefono: string}
 // atencion { fecha: date, servicio: servicio, comentarios: string}
 
 const initialState = {
     pacientes: [{
         id: 1,
         nombre: 'Coyote',
-        fechaNac: '05/03/2019',
+        fechaNac: '05/03/2015',
         dueno: 'Lucila Purcaro',
-        historial: []
-    }]
+        historial: [],
+        telefono: '1234-5678'
+    },
+        {
+            id: 2,
+            nombre: 'Morrison',
+            fechaNac: '10/10/2017',
+            dueno: 'Lucila Purcaro',
+            historial: [],
+            telefono: '1234-5678'
+        }]
 };
 
 function pacientesReducer (state=initialState, action) {

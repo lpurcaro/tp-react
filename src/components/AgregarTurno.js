@@ -1,33 +1,33 @@
 import React, {useState} from 'react';
 import {Button} from 'react-bootstrap';
 import {connect} from "react-redux";
-import {agregarServicio} from '../store/actions';
+import {agregarTurno} from '../store/actions';
 import ModalTurnos from "./ModalTurnos";
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        agregarServicio: (servicio) => dispatch(agregarServicio(servicio))
+        agregarTurno: (servicio) => dispatch(agregarTurno(servicio))
     }
 };
 
-const ConnectAgregarTurno = ({agregarServicio}) => {
+const ConnectAgregarTurno = ({agregarTurno}) => {
 
-    const [showAgregarServicio, setShowAgregarServicio] = useState(false);
+    const [showAgregarTurno, setShowAgregarTurno] = useState(false);
 
-    const toggleAgregarServicio = () => {
-        setShowAgregarServicio(!showAgregarServicio);
+    const toggleAgregarTurno = () => {
+        setShowAgregarTurno(!showAgregarTurno);
     };
 
-    const servicio = {
-        nombre: '',
-        precio: '',
-        tipo: '',
-        duracion: ''
+    const turno = {
+        fecha: '',
+        horario: '',
+        paciente: 0,
+        servicio: 0
     };
 
     return <>
-        <Button variant="outline-primary" onClick={toggleAgregarServicio}>Agregar Turno</Button>
-        <ModalTurnos servicio={servicio} onSubmit={agregarServicio} onClose={toggleAgregarServicio} show={showAgregarServicio} nuevo={true}/>
+        <Button variant="outline-primary" onClick={toggleAgregarTurno}>Agregar Turno</Button>
+        <ModalTurnos turno={turno} onSubmit={agregarTurno} onClose={toggleAgregarTurno} show={showAgregarTurno} nuevo={true}/>
     </>
 };
 
