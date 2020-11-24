@@ -64,7 +64,7 @@ const ConnectModalServicios = ({servicio, show, onClose, onSubmit, nuevo=false, 
 
                     <Form.Group controlId="tipo" onChange={e => setNuevoServicio({...nuevoServicio, tipo: e.target.value})}>
                         <Form.Label>Tipo</Form.Label>
-                        <Form.Control as="select" defaultValue={nuevoServicio.tipo || tipoAtencion[0]}>
+                        <Form.Control as="select" defaultValue={servicio?.tipo?.toString() || tipoAtencion[0]}>
                             { tipoAtencion.map(tipo => <option key={tipo}>{tipo}</option>) }
                         </Form.Control>
                     </Form.Group>
