@@ -8,11 +8,11 @@ const mapStateToProps = (state) => {
         pacientes: state.pacientes.pacientes,
         servicios: state.servicios.servicios
     }
-}
+};
 
 const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacientes, servicios}) => {
 
-    const [nuevoTurno, setNuevoTurno] = useState();
+    const [nuevoTurno, setNuevoTurno] = useState(new Date());
     const [fecha, setFecha] = useState();
 
     const [showFormError, setShowFormError] = useState(false);
@@ -31,7 +31,9 @@ const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacien
         const [dia, mes, ano] = turno?.fecha?.split('/')?.map(f => parseInt(f));
         const date = new Date(ano, mes - 1, dia, hora, minuto);
 
-        setFecha(date);
+        if (date.toString() !== 'Invalid Date') {
+            setFecha(date);
+        }
 
         setNuevoTurno({
             ...turno,
