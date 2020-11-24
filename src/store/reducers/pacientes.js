@@ -12,20 +12,24 @@ const initialState = {
         historial: [],
         telefono: '1234-5678'
     },
-        {
-            id: 2,
-            nombre: 'Morrison',
-            fechaNac: '10/10/2017',
-            dueno: 'Lucila Purcaro',
-            historial: [],
-            telefono: '1234-5678'
-        }]
+    {
+        id: 2,
+        nombre: 'Morrison',
+        fechaNac: '10/10/2017',
+        dueno: 'Lucila Purcaro',
+        historial: [],
+        telefono: '1234-5678'
+    }]
 };
 
 function pacientesReducer (state=initialState, action) {
     switch (action.type) {
         case AGREGAR_PACIENTE:
-            state.pacientes.push(action.data);
+            const id = state.pacientes[state.pacientes.length - 1].id + 1;
+            action.data.id = id;
+            state = Object.assign({}, state , {
+                pacientes: state.pacientes.concat(action.data)
+            });
         break;
         case EDITAR_PACIENTE:
             let idxEditar = state.pacientes.findIndex(paciente => paciente.id = action.data.id);
