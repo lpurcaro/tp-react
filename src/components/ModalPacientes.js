@@ -6,20 +6,11 @@ import DatePicker from "react-datepicker";
 
 const ModalPacientes = ({paciente, show, onClose, onSubmit, nuevo=false}) => {
 
-    const [nuevoPaciente, setNuevoPaciente] = useState(paciente);
+    const [nuevoPaciente, setNuevoPaciente] = useState();
     const [showFormError, setShowFormError] = useState(false);
     const [fecha, setFecha] = useState();
     const action = nuevo ? 'Agregar' : 'Editar';
 
-    // useEffect(() => {
-    //     if (!show) {
-    //         setNuevoServicio({})
-    //     }
-    // }, [show]);
-    //
-    // useEffect(() => {
-    //     setNuevoServicio(servicio);
-    // }, [servicio]);
 
     const agregar = () => {
         if (!nuevoPaciente.nombre || !nuevoPaciente.dueno || !nuevoPaciente.fechaNac || !nuevoPaciente.telefono) {
@@ -43,6 +34,18 @@ const ModalPacientes = ({paciente, show, onClose, onSubmit, nuevo=false}) => {
         setNuevoPaciente({...nuevoPaciente, fechaNac});
     };
 
+    useEffect(() => {setNuevoPaciente(paciente);
+            const fecha = paciente?.fechaNac?.split('/')?.map(f => parseInt(f));
+
+            if (fecha) {
+                const date = new Date(fecha[2], fecha[1] - 1, fecha[0]);
+
+                if (date.toString() !== 'Invalid Date') {
+                    setFecha(date);
+                }
+            }
+    }, [paciente]);
+
     return (
         <Modal show={show} onHide={onClose}>
             <Modal.Header closeButton>
@@ -56,18 +59,18 @@ const ModalPacientes = ({paciente, show, onClose, onSubmit, nuevo=false}) => {
                     <Form.Row>
                         <Form.Group as={Col} controlId="nombre" onChange={e => setNuevoPaciente({...nuevoPaciente, nombre: e.target.value})}>
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control type="text" defaultValue={nuevoPaciente.nombre}/>
+                            <Form.Control type="text" defaultValue={paciente.nombre}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="dueno" onChange={e => setNuevoPaciente({...nuevoPaciente, dueno: e.target.value})}>
                             <Form.Label>Dueño</Form.Label>
-                            <Form.Control type="text" defaultValue={nuevoPaciente.dueno}/>
+                            <Form.Control type="text" defaultValue={paciente.dueno}/>
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Group controlId="telefono" onChange={e => setNuevoPaciente({...nuevoPaciente, telefono: e.target.value})}>
                         <Form.Label>Teléfono</Form.Label>
-                        <Form.Control type="text" defaultValue={nuevoPaciente.telefono}/>
+                        <Form.Control type="text" defaultValue={paciente.telefono}/>
                     </Form.Group>
 
                     <Form.Group controlId="fechaNac">

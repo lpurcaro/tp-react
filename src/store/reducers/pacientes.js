@@ -32,8 +32,14 @@ function pacientesReducer (state=initialState, action) {
             });
         break;
         case EDITAR_PACIENTE:
-            let idxEditar = state.pacientes.findIndex(paciente => paciente.id = action.data.id);
-            state.pacientes[idxEditar] = action.data.paciente;
+            state = Object.assign({}, state , {
+                pacientes: state.pacientes.map(paciente => {
+                    if (paciente.id === action.data.id) {
+                        paciente = action.data
+                    }
+                    return paciente;
+                })
+            });
         break;
         case AGREGAR_ATENCION:
             let idxAgregar  = state.pacientes.findIndex(paciente => paciente.id = action.data.id);
