@@ -27,8 +27,14 @@ function turnosReducer (state=initialState, action) {
             });
         break;
         case EDITAR_TURNO:
-            let turno = state.turnos.findIndex(turno => turno.id === action.data.id);
-            state.turnos[turno] = action.data;
+            state = Object.assign({}, state , {
+                turnos: state.turnos.map(turno => {
+                    if (turno.id === action.data.id) {
+                        turno = action.data
+                    }
+                    return turno;
+                })
+            });
         break;
         case ELIMINAR_TURNO:
             state = Object.assign({}, state , {

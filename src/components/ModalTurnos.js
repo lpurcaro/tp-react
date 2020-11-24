@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 
 const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacientes, servicios}) => {
 
-    const [nuevoTurno, setNuevoTurno] = useState(turno);
+    const [nuevoTurno, setNuevoTurno] = useState();
     const [fecha, setFecha] = useState();
 
     const [showFormError, setShowFormError] = useState(false);
@@ -20,21 +20,35 @@ const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacien
 
     useEffect(() => {
         if (!show) {
-            setNuevoTurno({});
+            // setNuevoTurno({});
             setFecha(null);
             setShowFormError(false);
         }
     }, [show]);
 
     useEffect(() => {
-        setNuevoTurno(turno);
+        const [hora, minuto] = turno?.horario?.split(':')?.map(h => parseInt(h));
+        const [dia, mes, ano] = turno?.fecha?.split('/')?.map(f => parseInt(f));
+        const date = new Date(ano, mes - 1, dia, hora, minuto);
+
+        setFecha(date);
+
+        setNuevoTurno({
+            ...turno,
+            paciente: turno.paciente?.id?.toString(),
+            servicio: turno.servicio?.id?.toString()
+        });
     }, [turno]);
 
     const agregar = () => {
+
         if (!nuevoTurno.fecha || !nuevoTurno.horario || !nuevoTurno.paciente || !nuevoTurno.servicio) {
             setShowFormError(true);
             return;
         }
+
+        nuevoTurno.paciente = parseInt(nuevoTurno.paciente);
+        nuevoTurno.servicio = parseInt(nuevoTurno.servicio);
 
         onSubmit({
             id: turno.id,
@@ -67,7 +81,6 @@ const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacien
                     Todos los campos son obligatorios
                 </Alert>
                 <Form>
-
                     <Form.Group>
                         <Form.Label>Fecha </Form.Label>
                         <DatePicker
@@ -80,16 +93,18 @@ const ConnectModalTurnos = ({turno, show, onClose, onSubmit, nuevo=false, pacien
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="paciente" onChange={e => setNuevoTurno({...nuevoTurno, paciente: parseInt(e.target.value)})}>
+                    <Form.Group controlId="paciente" onChange={e => setNuevoTurno({...nuevoTurno, paciente: e.target.value})}>
                         <Form.Label>Paciente</Form.Label>
-                        <Form.Control as="select" defaultValue={nuevoTurno.paciente.id || null}>
-                            { pacientes.map(paciente => <option key={paciente.id} value={paciente.id}>{paciente.nombre}</option>) }
+                        <Form.Control as="select" defaultValue={turno?.paciente?.id?.toString() || '0'}>
+                            <option>Selecciona un paciente...</option>
+                            { pacientes.map(paciente => <option key={paciente.nombre} value={paciente.id}>{paciente.nombre}</option>) }
                         </Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId="servicio" onChange={e => setNuevoTurno({...nuevoTurno, servicio: parseInt(e.target.value)})}>
                         <Form.Label>Servicio</Form.Label>
-                        <Form.Control as="select" defaultValue={nuevoTurno.servicio.id || null}>
+                        <Form.Control as="select" defaultValue={turno?.servicio?.id?.toString() || '0'}>
+                            <option>Selecciona un servicio...</option>
                             { servicios.map(servicio => <option key={servicio.id} value={servicio.id}>{servicio.nombre}</option>) }
                         </Form.Control>
                     </Form.Group>

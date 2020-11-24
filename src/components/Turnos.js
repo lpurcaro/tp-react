@@ -33,6 +33,9 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [turnoAEliminar, setTurnoAEliminar] = useState();
 
+    const [turnoAEditar, setTurnoAEditar] = useState({paciente: 0, servicio: 0, fecha: '', horario: ''});
+    const [showEditarTurno, setShowEditarTurno] = useState(false);
+
     useEffect(() => {
         const turnosFullData = turnos.map(turno => {
             const paciente = pacientes.find(paciente => paciente.id === turno.paciente);
@@ -70,6 +73,15 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
         setShowDeleteModal(false);
     };
 
+    const toggleEditarTurno = (id) => {
+        setTurnoAEditar(turnosFullData.find(turno => turno.id === id));
+        setShowEditarTurno(true);
+    };
+
+    const editarTurno = (data) => {
+        editar(data);
+    };
+
     return (
         <>
             <div>
@@ -87,10 +99,10 @@ const ConnectTurnos = ({turnos, pacientes, servicios, eliminar, editar}) => {
                     onChange={date => setFecha(date)} />
             </div>
             <div className={'mt-sm'}>
-                <ListaTurnos turnos={turnosFiltrados} editar={editar} eliminar={toggleShowDeleteModal}/>
+                <ListaTurnos turnos={turnosFiltrados} editar={toggleEditarTurno} eliminar={toggleShowDeleteModal}/>
+                <ModalTurnos turno={turnoAEditar} onSubmit={editarTurno} onClose={() => setShowEditarTurno(false)} show={showEditarTurno}/>
                 <ModalEliminar show={showDeleteModal} close={() => setShowDeleteModal(false)} eliminar={eliminarTurno} tipo={'turno'}/>
             </div>
-            {/*<ModalTurnos servicio={turno} onSubmit={agregarTurno} onClose={toggleAgregarTurno} show={showAgregarTurno} nuevo={true}/>*/}
         </>
     );
 };
